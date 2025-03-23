@@ -36,7 +36,10 @@ async def shutdown():
 @app.post("/schedule")
 async def create_schedule(medicine: Medicine):
     med_start = date.today()
-    med_finish = med_start + timedelta(days=medicine.duration)
+    if medicine.duration == -1:
+        med_finish = date.max
+    else:
+        med_finish = med_start + timedelta(days=medicine.duration)
     query = ("""INSERT INTO schedules (medicine_name, frequency, duration, start, finish, user_id)
              VALUES (:medicine_name, :frequency, :duration, :start, :finish, :user_id) RETURNING id""")
     values = {"medicine_name": medicine.name, "frequency": medicine.frequency, "duration": medicine.duration,
