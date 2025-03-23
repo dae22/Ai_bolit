@@ -11,9 +11,8 @@ async def create_table_schedules():
         medicine_name VARCHAR(255) NOT NULL,
         frequency VARCHAR(50) NOT NULL,
         duration INT NOT NULL,
-        start TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-        end TIMESTAMP WITHOUT TIME ZONE,
-        
+        start DATE NOT NULL,
+        end DATE NOT NULL,
         user_id INT NOT NULL
         )
     ''')
